@@ -159,21 +159,21 @@ public with sharing class FlowControlLoopsCollections {
      * @return The grade for the given score.
      */
     public static String determineGrade(Integer score) {
-        String GradeByScore;
+        String gradeByScore;
 
         //If else logic to determine the grade based on the score
         if (score >= 90) {
-            GradeByScore = 'A';
+            gradeByScore = 'A';
         } else if (score >= 80) {
-            GradeByScore = 'B';
+            gradeByScore = 'B';
         } else if (score >= 70) {
-            GradeByScore = 'C';
+            gradeByScore = 'C';
         } else if (score >= 60) {
-            GradeByScore = 'D';
+            gradeByScore = 'D';
         } else {
-            GradeByScore = 'F';
+            gradeByScore = 'F';
         }
-        return GradeByScore; // Replace null with the variable you used to store the result
+        return gradeByScore; // Replace null with the variable you used to store the result
     }
 
 
@@ -245,7 +245,6 @@ public with sharing class FlowControlLoopsCollections {
      * @return A List of integers containing the numbers 1, 2, and 3.
      */
     public static List<Integer> createAndPopulateList() {
-        Integer createInt = 0;
         // Create a new list of integers
         List<Integer> intList = new List<Integer>();
         // Add the integers 1, 2, and 3 to the list
@@ -380,7 +379,7 @@ public with sharing class FlowControlLoopsCollections {
      */
     public static Map<String, Integer> addItemsToMap() {
         // Initialize an empty Map
-        Map<String, Integer> ItemsInMap = new Map<String, Integer>{
+        Map<String, Integer> itemsInMap = new Map<String, Integer>{
         // Add key-value pairs to the Map
         'Apples' => 5,
         'Oranges' => 10,
@@ -389,7 +388,7 @@ public with sharing class FlowControlLoopsCollections {
         'Grapes' => 25
         };
 
-        return ItemsInMap; // Replace null with the variable you used to store the result
+        return itemsInMap; // Replace null with the variable you used to store the result
     }
 
     /**
