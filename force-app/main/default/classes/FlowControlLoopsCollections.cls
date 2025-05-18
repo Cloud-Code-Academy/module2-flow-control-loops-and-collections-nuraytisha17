@@ -37,6 +37,8 @@ public with sharing class FlowControlLoopsCollections {
             return 'Hello World!';
         }  
     }
+    // Anytime you compare two things if x or y equal null and are Integers, Doubles, Dates, or Datetimes, the expression is false.
+    // https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_expressions_operators_understanding.htm
 
     /**
      * Question 2
@@ -48,8 +50,9 @@ public with sharing class FlowControlLoopsCollections {
      * @return true if the person is eligible to vote, false otherwise.
      */
     public static Boolean votingEligibility(Integer age) {
+        final Integer VOTING_AGE = 18;
         //If the age is less than 18, the method will return false
-        return age >= 18; // Replace null with the variable you used to store the result
+        return age >= VOTING_AGE; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -65,18 +68,16 @@ public with sharing class FlowControlLoopsCollections {
         // Initialize largestNum as null
         Integer largestNum = null;
 
-        //if either number is null, return null
-        if(num1 == null || num2 == null){
-        return null;
-        }    
+        //if either number is null, return null 
         //If both numbers are equal, it returns that number
-        if(num1 >= num2) {
-        largestNum = num1;
-        } else {
-        largestNum = num2;
+        if (num1 >= num2) {
+            largestNum = num1;
+        } else if ( num2 > num1) {
+            largestNum = num2;
         }
         return largestNum; // Replace null with the variable you used to store the result
     }
+    // You don't need the null check because you set largestNum to null to start and if either number is null then the if statements will evaluate to false.
 
 
     /**
@@ -88,22 +89,22 @@ public with sharing class FlowControlLoopsCollections {
      * @return A string indicating whether the number is "Positive", "Negative", or "Zero", or null if the number is null.
      */
     public static String checkNumber(Integer a) {
-        String checkNumberStatus;
 
         //If the number is null, return null
+        // Return a string indicating whether the number is "Positive", "Negative", or "Zero"
         if (a == Null) {
             return null;
-        }
-        // Return a string indicating whether the number is "Positive", "Negative", or "Zero"
-        if (a > 0) {
-            checkNumberStatus = 'Positive';
+        } else if (a > 0) {
+            return 'Positive';
         } else if (a < 0) {
-            checkNumberStatus = 'Negative';
+            return 'Negative';
         } else {
-            checkNumberStatus = 'Zero';
+            return 'Zero';
         }
-        return checkNumberStatus; // Replace null with the variable you used to store the result
     }
+    // What you had does work, but you don't need to store something in memory just to return it.
+    // Also, I would keep all this logic in a single if else if statement since it all goes together.
+    // This will work because the final else clause will execute if nothing else does above it so you will not get an error for not returning something.
 
     /**
      * Question 5
@@ -114,16 +115,22 @@ public with sharing class FlowControlLoopsCollections {
      * @return A string indicating whether the number is "Even" or "Odd", or null if the number is null.
      */
     public static String checkEvenOdd(Integer a) {
-        String oddOrEven;
 
         //If the number is null, return null
         if (a == null) {
             return null;
+        } else if (Math.mod(a,2) == 0) {
+            return 'Even';
+        } else {
+            return 'Odd'; // Replace null with the variable you used to store the result
         }
-        //Check for even or odd number -- I wanted to try ternery statement, but open to suggestion if this can be combined with the if logic
-        oddOrEven = Math.mod(a,2) == 0 ? 'Even' : 'Odd';
-        return oddOrEven; // Replace null with the variable you used to store the result
     }
+    // Don't instantiate variables before you need them and try to assign something to the variable unless scope prevents it.
+    // Great use of a Guard Clause to return early if it's null.
+    // This is awesome to see you trying the Ternary Operator! Technically you can combine all of this using 2 Ternary operators, but I would not have expected you to know this as it's much more advanced.
+    // String oddOrEven = a == null ? null : Math.mod(a, 2) == 0 ? 'Even' : 'Odd';
+    // This will first evaluate the a == null if this is true your value will be set to null. If this is false then it will evaluate Math.mod(a, 2) == 0 and if true it will assign Even and if false it will assign Odd. It's basically an if else if else statement in 1 line of code.
+    // If you are going to use more than 2 Ternary Operators though I would recommend using an if else if statement as it's easier to follow.
 
     /**
      * Question 6
@@ -133,17 +140,15 @@ public with sharing class FlowControlLoopsCollections {
      * @return A string indicating whether the input is "Empty", "Null", or "Contains Text".
      */
     public static String checkString(String a) {
-        String inputStatus;
 
         //Checks if a string is empty, null, or contains text
         if (a == null) {
-            inputStatus = 'Null';
+            return 'Null';
         } else if (a == '') {
-            inputStatus = 'Empty';
+            return 'Empty';
         } else {
-            inputStatus = 'Contains Text';
+            return 'Contains Text'; // Replace null with the variable you used to store the result
         }
-        return inputStatus; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -159,21 +164,19 @@ public with sharing class FlowControlLoopsCollections {
      * @return The grade for the given score.
      */
     public static String determineGrade(Integer score) {
-        String gradeByScore;
 
         //If else logic to determine the grade based on the score
         if (score >= 90) {
-            gradeByScore = 'A';
+            return 'A';
         } else if (score >= 80) {
-            gradeByScore = 'B';
+            return 'B';
         } else if (score >= 70) {
-            gradeByScore = 'C';
+            return 'C';
         } else if (score >= 60) {
-            gradeByScore = 'D';
+            return 'D';
         } else {
-            gradeByScore = 'F';
+            return 'F';
         }
-        return gradeByScore; // Replace null with the variable you used to store the result
     }
 
 
@@ -231,8 +234,8 @@ public with sharing class FlowControlLoopsCollections {
             resultString += inputString ;
             // If it is not the last iteration, add a semicolon to separate the strings
         if (i < repeatCount - 1) {
-                resultString += '; ';
-        }
+            resultString += '; ';
+            }
         }
         // Return the final result string
         return resultString; // Replace null with the variable you used to store the result
@@ -255,6 +258,10 @@ public with sharing class FlowControlLoopsCollections {
         // Return the populated list
         return intList; // Replace null with the variable you used to store the result
     }
+    // Now for advanced practice since you know the numbers that you want to add to the List try creating this using a List Constructor.
+    // https://salesforce.stackexchange.com/questions/203694/how-to-initialize-list-set-values-by-construction-in-apex
+
+
 
     /**
      * Question 12
@@ -272,6 +279,7 @@ public with sharing class FlowControlLoopsCollections {
         // Return the updated list
         return numberList; // Replace null with the variable you used to store the result
     }
+    // Now for advanced practice try to solve this one as though you don't know where 3 exists in the list and you have to find the index of 3 prior to removing it.
 
     /**
      * Question 13
@@ -307,6 +315,8 @@ public with sharing class FlowControlLoopsCollections {
 
         return stringSet; // Replace null with the variable you used to store the result
     }
+    // Now try this with the Set Constructor that accepts a List.
+    // https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_set.htm
 
     /**
      * Question 15
@@ -319,11 +329,12 @@ public with sharing class FlowControlLoopsCollections {
         Integer sum = 0;
 
      // Loop through the list of integers
-        for (Integer i = 0; i < numberList.size(); i++)
+        for (Integer num : numberList) {
          // if the number is negative skip this iteration
-        if (numberList[i] > 0){
-            sum += numberList[i];
-        } 
+        if (num > 0){
+            sum += num;
+            } 
+        }
         return sum;// Replace null with the variable you used to store the result
     }
 
@@ -379,17 +390,21 @@ public with sharing class FlowControlLoopsCollections {
      */
     public static Map<String, Integer> addItemsToMap() {
         // Initialize an empty Map
-        Map<String, Integer> itemsInMap = new Map<String, Integer>{
+        Map<String, Integer> fruitToQty = new Map<String, Integer>{
         // Add key-value pairs to the Map
-        'Apples' => 5,
-        'Oranges' => 10,
-        'Bananas' => 15,
-        'Pears' => 20,
-        'Grapes' => 25
+            'Apples' => 5,
+            'Oranges' => 10,
+            'Bananas' => 15,
+            'Pears' => 20,
+            'Grapes' => 25
         };
 
-        return itemsInMap; // Replace null with the variable you used to store the result
+        return fruitToQty; // Replace null with the variable you used to store the result
     }
+    // Maps are typically name keyToValue for example fruitToQuantity or fruitToQty.
+    // This is so that as your code grows you remember it's a map and not a List or Set and you can also easily identify what the key is and what the value is in the Map.
+
+
 
     /**
      * Question 19
@@ -402,23 +417,25 @@ public with sharing class FlowControlLoopsCollections {
      */
     public static Integer getSalary(String employeeName) {
         // Initialize a Map
-        Map<String, Integer> employeeMap = new Map<String, Integer>{
+        Map<String, Integer> employeeToSalary = new Map<String, Integer>{
         // Add key-value pairs to the Map
-        'John Doe' => 50000,
-        'Jane Smith' => 60000,
-        'Sam Brown' => 55000,
-        'Alice Johnson' => 65000
+            'John Doe' => 50000,
+            'Jane Smith' => 60000,
+            'Sam Brown' => 55000,
+            'Alice Johnson' => 65000
         };
 
         // Get the salary of the employee
-        Integer employeeSalary = employeeMap.get(employeeName);
+        Integer employeeSalary = employeeToSalary.get(employeeName);
         
-        if (!employeeMap.containsKey(employeeName)) {
-        return null;   // Return null if the employee is not found in the Map
-        }
+        //if (!employeeToSalary.containsKey(employeeName)) {
+        //return null;   // Return null if the employee is not found in the Map
+        //}
 
         return employeeSalary; // Replace null with the variable you used to store the result to get the salary of the employee
         }
+        // You don't need this Map.containsKey() check, if Map.get() does not find the key in the Map it will set your variable to null automatically.
+        //https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_map.htm
 
     /**
      * Question 20
@@ -432,23 +449,23 @@ public with sharing class FlowControlLoopsCollections {
      */
     public static List<String> getHighPaidEmployees() {
         // Initialize a Map
-        Map<String, Integer> employeeSalaries = new Map<String, Integer>{
+        Map<String, Integer> employeeToSalaries = new Map<String, Integer>{
         // Add key-value pairs to the Map
-        'John Doe' => 50000,
-        'Jane Smith' => 60000,
-        'Sam Brown' => 55000,
-        'Alice Johnson' => 65000
+            'John Doe' => 50000,
+            'Jane Smith' => 60000,
+            'Sam Brown' => 55000,
+            'Alice Johnson' => 65000
         };
 
         // Initialize a list to store the names of high paid employees
         List<String> highPaidEmployeeList = new List<String>();
 
         // Iterate over the Map using a for loop
-        for (String employeeName : employeeSalaries.keySet()) {
-        // Check if the salary of the employee is more than 55000
-        if (employeeSalaries.get(employeeName) > 55000) {
-        highPaidEmployeeList.add(employeeName);   // Add the employee to the list of high paid employees
-        }      
+        for (String employeeName : employeeToSalaries.keySet()) {
+            // Check if the salary of the employee is more than 55000
+            if (employeeToSalaries.get(employeeName) > 55000) {
+                highPaidEmployeeList.add(employeeName);   // Add the employee to the list of high paid employees
+            }      
         }
         // Return the list of high paid employees
         return highPaidEmployeeList; // Replace null with the variable you used to store the result
