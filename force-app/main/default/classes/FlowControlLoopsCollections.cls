@@ -249,11 +249,8 @@ public with sharing class FlowControlLoopsCollections {
      */
     public static List<Integer> createAndPopulateList() {
         // Create a new list of integers
-        List<Integer> intList = new List<Integer>();
+        List<Integer> intList = new List<Integer>{1, 2, 3};
         // Add the integers 1, 2, and 3 to the list
-        intList.add(1);
-        intList.add(2);
-        intList.add(3);
 
         // Return the populated list
         return intList; // Replace null with the variable you used to store the result
@@ -274,7 +271,15 @@ public with sharing class FlowControlLoopsCollections {
         List<Integer> numberList = new List<Integer>{1, 2, 3, 4, 5}; //DO NOT CHANGE
 
         // Remove the 3rd element (number 3) from the list
-        numberList.remove(2);
+        //numberList.remove(2);
+
+        //Find the index of 3 in the list
+        Integer indexOfThree = numberList.indexOf(3);
+
+        //Remove the element with the value of 3 from the list
+        if (indexOfThree != -1) {
+            numberList.remove(indexOfThree);
+        }
         
         // Return the updated list
         return numberList; // Replace null with the variable you used to store the result
